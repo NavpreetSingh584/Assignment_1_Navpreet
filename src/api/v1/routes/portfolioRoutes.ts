@@ -8,12 +8,12 @@ import { calculatePortfolioPerformance } from "../../../portfolio/portfolioPerfo
 const router: Router = Router();
 
 /**
- * Parses request body into numbers
- * @param body - request body
+ * Parses query params into numbers
+ * @param query - request query
  * @returns parsed values
  */
-const parseBody = (body: unknown): { initialInvestment: number; currentValue: number } => {
-  const raw = body as { initialInvestment?: unknown; currentValue?: unknown };
+const parseQuery = (query: unknown): { initialInvestment: number; currentValue: number } => {
+  const raw = query as { initialInvestment?: unknown; currentValue?: unknown };
 
   const initialInvestment: number = Number(raw.initialInvestment);
   const currentValue: number = Number(raw.currentValue);
@@ -34,16 +34,19 @@ const isValidInput = (initialInvestment: number, currentValue: number): boolean 
   return validNumbers && validInitial;
 };
 
-// POST /api/v1/portfolio/performance
-router.post("/performance", (req: Request, res: Response) => {
-  const { initialInvestment, currentValue } = parseBody(req.body);
+// GET /api/v1/portfolio/performance?initialInvestment=10000&currentValue=11500
+router.get("/performance", (req: Request, res: Response) => {
+  // parse values from query string
+  const { initialInvestment, currentValue } = parseQuery(req.query);
 
+  // validate inputs
   if (!isValidInput(initialInvestment, currentValue)) {
     return res.status(400).json({
-      message: "Invalid input. initialInvestment must be > 0 and values must be numbers."
+      message: "Invalid query parameters"
     });
   }
 
+  // calculate and return result
   const result = calculatePortfolioPerformance(initialInvestment, currentValue);
   return res.status(200).json(result);
 });
