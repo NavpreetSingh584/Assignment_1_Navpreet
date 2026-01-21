@@ -7,12 +7,12 @@ import { Response } from "supertest";
 import app from "../src/app";
 // import express application and server
 
-describe("POST /api/v1/portfolio/performance", () => {
+describe("GET /api/v1/portfolio/performance", () => {
   it("should return portfolio calculation results", async () => {
-    // create POST request with valid payload
+    // create GET request with valid query parameters
     const response: Response = await request(app)
-      .post("/api/v1/portfolio/performance")
-      .send({ initialInvestment: 10000, currentValue: 12000 });
+      .get("/api/v1/portfolio/performance")
+      .query({ initialInvestment: 10000, currentValue: 12000 });
 
     // assert response status OK and result object to have specified properties
     expect(response.status).toBe(200);
@@ -22,10 +22,10 @@ describe("POST /api/v1/portfolio/performance", () => {
   });
 
   it("should return 400 for invalid input", async () => {
-    // create POST request with invalid payload
+    // create GET request with invalid query parameters
     const response: Response = await request(app)
-      .post("/api/v1/portfolio/performance")
-      .send({ initialInvestment: 0, currentValue: 12000 });
+      .get("/api/v1/portfolio/performance")
+      .query({ initialInvestment: 0, currentValue: 12000 });
 
     // assert bad request response
     expect(response.status).toBe(400);
