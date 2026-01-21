@@ -1,10 +1,10 @@
 import express, { Application, Request, Response } from "express";
 // import express and types
 
-import healthRoutes from "./api/v1/routes/healthRoutes";
+import healthRoutes from "../src/api/v1/routes/healthRoutes";
 // import health routes
 
-import portfolioRoutes from "./api/v1/routes/portfolioRoutes";
+import portfolioRoutes from "../src/api/v1/routes/portfolioRoutes";
 // import portfolio routes
 
 // Primary data type annotations
