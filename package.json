@@ -1,4 +1,26 @@
 {
+  "name": "assignment_1_navpreet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NavpreetSingh584/Assignment_1_Navpreet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NavpreetSingh584/Assignment_1_Navpreet/issues"
+  },
+  "homepage": "https://github.com/NavpreetSingh584/Assignment_1_Navpreet#readme",
   "dependencies": {
     "express": "^5.2.1"
   },
